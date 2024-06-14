@@ -54,8 +54,9 @@ public class AuthConfig {
        return http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->{
-                    req.requestMatchers("/api/v1/**").permitAll();
+                    req.requestMatchers("/api/v1/auth/login").permitAll();
                     req.requestMatchers("/api/v1/user/register").permitAll();
+                    req.requestMatchers("/api/v1/user/profile/{email}").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
